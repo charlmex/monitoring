@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring-stack
+spec:
+  source:
+    repoURL: https://github.com/charlmex/monitoring.git # Replace with your GitHub repo URL
+    targetRevision: main # Or specify a specific branch or tag
+    path: charts/kube-prometheus-stack # Path to the chart within your repo
+  destination:
+    server: https://kubernetes.default.svc # Your cluster's URL
+    namespace: monitoring # The namespace for your deployment
+  syncPolicy:
+    automated:
+      prune: true
